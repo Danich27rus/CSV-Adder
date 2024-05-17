@@ -11,3 +11,23 @@ function parse_str_to_table(input, separator)
 
 	return t
 end
+
+function print_debug(variable, text)
+	print("[DEBUG]: " .. variable .. ": " .. text)
+end
+
+function is_dir(path)
+	return exists(path.."/")
+end
+
+function exists(file)
+	local ok, err, code = os.rename(file, file)
+
+	if not ok then
+	   if code == 13 then
+		  return true
+	   end
+	end
+
+	return ok, err
+ end
