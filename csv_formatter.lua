@@ -1,7 +1,9 @@
 require 'constants'
 require 'utils'
---require 'debug'
 require '1251_converter'
+
+--works with lua 5.1 and 5.2
+local Workbook = require "xlsxwriter.workbook"
 
 local separators = -1
 
@@ -54,7 +56,7 @@ function main()
         return
     end
 
-    local lines = parse_str_to_table(csv_file:read("a"),"\n")
+    local lines = parse_str_to_table(csv_file:read("*a"),"\n")
     for _, v in pairs(lines) do
         print(v)
     end
@@ -66,11 +68,11 @@ end
 
 main()
 
-local str1252 = "\127\128\129\130\131\132\133\134\135\136"  -- "one euro" in latin-1
+local str1252 = "\65\66\67"  -- "one euro" in latin-1
 local str_utf8 = str1252:toutf8()
 --local str1252_2 = str_utf8:fromutf8()
-print("\n" .. str1252)
-print("\n" .. str_utf8)
+print("\n1252:" .. str1252)
+print("ut8:" .. str_utf8)
 --print("\n" .. str1252_2)
 
 --print("\1\2\3\4\5\6\7\8\9\10\11\12\13\14\15\16\17\18\19\20\21\22\23\24\25\26\27\28\29\30\31\32\33\34\35\36\37\38\39\40 \
