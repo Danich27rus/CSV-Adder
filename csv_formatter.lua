@@ -37,7 +37,6 @@ function main()
         local line = csv_file:read("*line")
         separators = #parse_str_to_table(line, SEPARATOR)
     end
-    io.close(csv_file)
 
     if DEBUG then
         --separators on second level of stack because it's out of scope
@@ -47,6 +46,8 @@ function main()
     if err ~= nil then
         return
     end
+
+    io.close(csv_file)
     if separators < 2 then
         io.write("File dosen't contain separator '" .. SEPARATOR .. "'.\nMaybe it's not in MS-DOS format?\n")
     end
@@ -68,7 +69,7 @@ end
 
 main()
 
-local str1252 = "\65\66\67"  -- "one euro" in latin-1
+local str1252 = "\129"  -- "one euro" in latin-1
 local str_utf8 = str1252:toutf8()
 --local str1252_2 = str_utf8:fromutf8()
 print("\n1252:" .. str1252)
